@@ -33,75 +33,83 @@ def get_doc():
     with open("links.txt", "r+", encoding="utf-8") as f:
         links = json.load(f)
 
-    start = 0
-    end = len(links)
-
     failed_links = []
 
-    for i in range(start, end):
-        url = links[i]
+    def scrape(start, end):
+        nonlocal failed_links
 
-        try:
-            response = requests.post(url)
+        for i in range(start, end):
+            url = links[i]
 
-            parsed_response = BeautifulSoup(response.content, "html.parser")
-            status = ""
-            issuing_authority = ""
-            number = ""
-            doc_type = ""
-            full_doc = ""
+            print(f"----------------SCRAPING DOC {i}-----------------------------------")
 
             try:
-                status = parsed_response.select(
-                    "div.fulltext > div.vbInfo > ul > li.red"
-                )[0].text.strip()
-                print(f"Status: {status}")
-            except:
-                pass
+                response = requests.post(url)
 
-            try:
-                issuing_authority = parsed_response.select(
-                    "div.fulltext > div:nth-child(2) > table:nth-child(1) > tbody > tr > td > div:nth-child(1) > b"
-                )[0].text.strip()
-                print(f"issuing_authority, {issuing_authority}")
-            except:
-                pass
+                parsed_response = BeautifulSoup(response.content, "html.parser")
+                status = ""
+                issuing_authority = ""
+                number = ""
+                doc_type = ""
+                full_doc = ""
 
-            try:
-                number = parsed_response.select(
-                    "div.fulltext > div:nth-child(2) > table:nth-child(1) > tbody > tr > td > div:nth-child(3)"
-                )[0].text.strip()
-                print(f"number, {number}")
-            except:
-                pass
+                try:
+                    status = parsed_response.select(
+                        "div.fulltext > div.vbInfo > ul > li.red"
+                    )[0].text.strip()
+                    print(f"Status: {status}")
+                except:
+                    pass
 
-            try:
-                doc_type = parsed_response.select(
-                    '#toanvancontent > p[align="center"]:nth-child(1) > strong'
-                )[0].text.strip()
-                print(f"doc_type, {doc_type}")
-            except:
-                pass
+                try:
+                    issuing_authority = parsed_response.select(
+                        "div.fulltext > div:nth-child(2) > table:nth-child(1) > tbody > tr > td > div:nth-child(1) > b"
+                    )[0].text.strip()
+                    print(f"issuing_authority, {issuing_authority}")
+                except:
+                    pass
 
-            try:
-                full_doc = parsed_response.select("#toanvancontent")[0].text.strip()
-            except:
-                pass
+                try:
+                    number = parsed_response.select(
+                        "div.fulltext > div:nth-child(2) > table:nth-child(1) > tbody > tr > td > div:nth-child(3)"
+                    )[0].text.strip()
+                    print(f"number, {number}")
+                except:
+                    pass
 
-            document = {
-                "status": status,
-                "issuing_authority": issuing_authority,
-                "number": number,
-                "doc_type": doc_type,
-                "full_doc": full_doc,
-            }
+                try:
+                    doc_type = parsed_response.select(
+                        '#toanvancontent > p[align="center"]:nth-child(1) > strong'
+                    )[0].text.strip()
+                    print(f"doc_type, {doc_type}")
+                except:
+                    pass
 
-            with open(f"{i}.json", "w+", encoding="utf-8") as f:
-                json.dump(document, f)
+                try:
+                    full_doc = parsed_response.select("#toanvancontent")[0].text.strip()
+                except:
+                    pass
 
-        except Exception as e:
-            failed_links.append(url)
-            print(url, e)
+                document = {
+                    "status": status,
+                    "issuing_authority": issuing_authority,
+                    "number": number,
+                    "doc_type": doc_type,
+                    "full_doc": full_doc,
+                }
+
+                with open(f"{i}.json", "w+", encoding="utf-8") as f:
+                    json.dump(document, f)
+
+            except Exception as e:
+                failed_links.append(url)
+                print(url, e)
+
+                if isinstance(e, tuple):
+                    if 'Connection aborted' in e[0]:
+                        scrape(i, end)
+
+    scrape(864, len(links))
 
     with open("failed_links.txt", "w+", encoding="utf-8") as f:
         json.dump(failed_links, f)
