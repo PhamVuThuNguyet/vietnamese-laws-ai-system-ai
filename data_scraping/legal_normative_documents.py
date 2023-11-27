@@ -96,7 +96,7 @@ def get_doc():
                 "full_doc": full_doc,
             }
 
-            with open(f"{url}.json", "w+", encoding="utf-8") as f:
+            with open(f"{i}.json", "w+", encoding="utf-8") as f:
                 json.dump(document, f)
 
         except Exception as e:
