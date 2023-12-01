@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 from schema import TrainingRequest, ChatRequest, SearchRequest, BatchTrainingRequest
 import data_training
+from chat import ChatAgent
 
 app = FastAPI()
 
@@ -40,7 +41,12 @@ async def train_data(request: BatchTrainingRequest):
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
-    pass
+    messages = request.messages
+    question = messages[-1]
+    chat_agent = ChatAgent()
+    relevant_docs =  chat_agent.query_relevant_docs(question)
+    response = chat_agent.chat(question, relevant_docs)
+    return response
 
 @app.post("/search")
 async def search(request: SearchRequest):
