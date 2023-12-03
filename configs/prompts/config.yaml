@@ -1,0 +1,12 @@
+qaPrompt:
+  filepath: "configs/prompts/qa_prompt.yaml"
+  createdDate: "2023/12/03"
+condensePrompt:
+  filepath: "configs/prompts/condense_prompt.yaml"
+  createdDate: "2023/12/03"
+summarizePrompt:
+  filepath: "configs/prompts/summarize_prompt.yaml"
+  createdDate: "2023/12/03"
+detectLanguagePrompt:
+  filepath: "configs/prompts/detect_language_prompt.yaml"
+  createdDate: "2023/12/03"

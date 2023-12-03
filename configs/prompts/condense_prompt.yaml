@@ -1,0 +1,21 @@
+_type: prompt
+input_variables:
+  - chat_history
+  - question
+template: >
+  Summarize the following conversation and the user's new question into a single standalone question.
+  ---
+
+  Conversation: 
+
+  "{chat_history}"
+
+  ---
+
+  New question from user: 
+
+  "{question}"
+
+  ---
+
+  A standalone question:
