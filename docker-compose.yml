@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  ai:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: vietnam_laws_ai_service
+    ports:
+      - "9000:9000"
+    restart: always
+    volumes:
+      - .:/app
+      - /app/ai
+    networks:
+      - vietnam-laws-network
+
+networks:
+  vietnam-laws-network:
+    name: vietnam-laws-network
+    driver: bridge
