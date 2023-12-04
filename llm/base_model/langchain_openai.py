@@ -12,6 +12,13 @@ from fastapi import HTTPException
 from langchain.chains import LLMChain
 from langchain.callbacks.manager import CallbackManagerForChainRun
 from langchain.chains import ConversationalRetrievalChain
+"""
+Copyright (c) VKU.NewEnergy.
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+"""
+
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
