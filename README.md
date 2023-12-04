@@ -20,8 +20,9 @@ pip install -r requirements.txt
 python main.py
 ```
 ### Using docker
+> :warning: Please make sure that you have Docker installed.
 ```
-docker-compose up
+docker compose up
 ```
 
 Afterwards, FastAPI automatically generates documentation based on the specification of the endpoints you have written. You can find the docs at http://localhost:9000/docs.
