@@ -16,18 +16,17 @@ git clone https://github.com/VKU-NewEnergy/vietnamese-laws-ai-system-ai.git
 cd vietnamese-laws-ai-system-ai
 ```
 
-## Launch the project
-
-### Run by `make` command
-
-- Copy `.env.example` to `.env` file
+## Prepare environment variables
+- Copy environment variables
 
 ```
 cp .env.example .env
 ```
+- Fill in value of environment variables in `.env` file
 
-- Fill in environment's values in `.env` file
-- Run services
+## Launch the project
+
+### Run by `make` command
 
 ```
 make install
