@@ -10,8 +10,9 @@ import logging
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForRetrieverRun,
 )
-
+from core.constants import IngestDataConstants
 logging.basicConfig(level=logging.INFO)
+
 
 app = FastAPI(title="Vietnamese Laws Exploration", version="1.0.0")
 
@@ -57,6 +58,6 @@ async def chat(request: ChatRequest):
 @app.post("/search")
 async def search(request: SearchRequest):
     keyword = request.keyword
-    _, retriever = LangchainOpenAI.get_langchain_retriever()
+    _, retriever = LangchainOpenAI.get_langchain_retriever(vectorstore_folder_path=IngestDataConstants.VECTORSTORE_FOLDER)
     result = await retriever._aget_relevant_documents(query=keyword, run_manager = AsyncCallbackManagerForRetrieverRun.get_noop_manager())
     return result
