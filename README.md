@@ -16,33 +16,23 @@ git clone https://github.com/VKU-NewEnergy/vietnamese-laws-ai-system-ai.git
 cd vietnamese-laws-ai-system-ai
 ```
 
-## Prepare environment variables
-- Copy environment variables
-
+## Launch app
+#### 1. Prepare environment
+- Create `.env` file in the root directory.
+- Copy content from `.env.example` and change to your correct data.
+#### 2. Start app
+#### 2.1 Using `make` command
+```bash
+make all
 ```
-cp .env.example .env
-```
-- Fill in value of environment variables in `.env` file
-
-## Launch the project
-
-### Run by `make` command
-
-```
-make install
-```
-
-### Run locally
-
+#### 2.2 Run locally
 ```
 pip install -r requirements.txt
 python main.py
 ```
-
-### Using docker
+#### 2.3 Using docker
 
 > :warning: Please make sure that you have Docker installed.
-
 ```
 docker compose up
 ```
