@@ -1,13 +1,11 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import langchain
 
 from core.data_ingestor import DataIngestor
 from schemas import BatchTrainingRequest, ChatRequest, SearchRequest, TrainingRequest
 from routes.chat import chat as ChatAgent
 from llm.base_model.langchain_openai import LangchainOpenAI
-import os 
 import logging
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForRetrieverRun,

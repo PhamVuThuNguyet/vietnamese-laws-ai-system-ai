@@ -9,7 +9,7 @@ import backoff
 import openai
 import yaml
 from fastapi import HTTPException
-from langchain import LLMChain
+from langchain.chains import LLMChain
 from langchain.callbacks.manager import CallbackManagerForChainRun
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chains.question_answering import load_qa_chain
@@ -25,7 +25,7 @@ from llm.base_model.retrieval_chain import CustomConversationalRetrievalChain
 from llm.data_loader.load_langchain_config import LangChainDataLoader
 from llm.data_loader.vectorstore_retriever import CustomVectorStoreRetriever
 
-@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
+@backoff.on_exception(backoff.expo, openai.RateLimitError)
 def openai_embedding_with_backoff():
     return OpenAIEmbeddings(chunk_size=IngestDataConstants.CHUNK_OVERLAP)
 

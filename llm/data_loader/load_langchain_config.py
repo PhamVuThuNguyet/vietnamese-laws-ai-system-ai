@@ -5,7 +5,7 @@ Load langchain configs contains LLMChain model and Prompt.
 """
 import os.path
 import yaml
-from langchain import BasePromptTemplate, PromptTemplate
+from langchain.prompts import BasePromptTemplate, PromptTemplate
 from langchain.prompts import load_prompt
 
 from core.constants import BaseConstants

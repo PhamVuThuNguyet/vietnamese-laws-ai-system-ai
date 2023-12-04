@@ -4,7 +4,7 @@ from langchain.callbacks import get_openai_callback
 from langdetect import detect
 
 from core.constants import ErrorChatMessageConstants
-from core.utils import check_goodbye, check_hello, preprocess_suggestion_request
+from core.utils import preprocess_suggestion_request
 from llm.base_model.langchain_openai import LangchainOpenAI
 from llm.data_loader.load_langchain_config import LangChainDataLoader
 from schemas import ChatRequest

@@ -8,7 +8,7 @@ from langchain.callbacks.manager import (
 )
 from langchain.schema import BaseRetriever, Document
 from langchain.vectorstores import VectorStore
-from pydantic import Field, root_validator
+from pydantic import Field, model_validator
 
 
 class CustomVectorStoreRetriever(BaseRetriever):
@@ -31,7 +31,6 @@ class CustomVectorStoreRetriever(BaseRetriever):
 
         arbitrary_types_allowed = True
 
-    @root_validator()
     def validate_search_type(cls, values: Dict) -> Dict:
         """Validate search type."""
         search_type = values["search_type"]
