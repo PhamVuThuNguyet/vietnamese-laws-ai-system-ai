@@ -125,7 +125,7 @@ class CustomConversationalRetrievalChain(ConversationalRetrievalChain):
             run_manager.on_retriever_error(e)
             raise e
         else:
-            run_manager.on_retriever_end(
+            await run_manager.on_retriever_end(
                 merged_documents,
                 **kwargs,
             )

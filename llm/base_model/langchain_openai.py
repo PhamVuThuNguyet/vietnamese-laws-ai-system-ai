@@ -27,7 +27,7 @@ from langchain.schema import HumanMessage
 from langchain.vectorstores import FAISS
 from langchain.vectorstores.base import VectorStore
 
-from core.constants import IngestDataConstants, LangChainOpenAIConstants
+from core.constants import IngestDataConstants, LangChainOpenAIConstants, BaseConstants
 from llm.base_model.retrieval_chain import CustomConversationalRetrievalChain
 from llm.data_loader.load_langchain_config import LangChainDataLoader
 from llm.data_loader.vectorstore_retriever import CustomVectorStoreRetriever
@@ -57,7 +57,7 @@ class LangchainOpenAI:
         else:
             self.lang = language
 
-        vectorstore_folder_path = IngestDataConstants.VECTORSTORE_FOLDER
+        vectorstore_folder_path = os.path.join(BaseConstants.ROOT_PATH, IngestDataConstants.VECTORSTORE_FOLDER)
 
         self.vectorstore, self.vectorstore_retriever = self.get_langchain_retriever(
             vectorstore_folder_path=vectorstore_folder_path
@@ -95,6 +95,7 @@ class LangchainOpenAI:
 
         try:
             embeddings = openai_embedding_with_backoff()
+            
             vectorstore = FAISS.load_local(
                 folder_path=vectorstore_folder_path, embeddings=embeddings
             )
@@ -113,7 +114,7 @@ class LangchainOpenAI:
 
         except Exception as e:
             raise HTTPException(
-                status_code=500, detail="Error when loading vectorstore"
+                status_code=500, detail=f"Error when loading vectorstore, {e}"
             )
 
 
