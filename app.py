@@ -9,6 +9,9 @@ from routes.chat import chat as ChatAgent
 from llm.base_model.langchain_openai import LangchainOpenAI
 import os 
 import logging
+from langchain.callbacks.manager import (
+    AsyncCallbackManagerForRetrieverRun,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -57,5 +60,5 @@ async def chat(request: ChatRequest):
 async def search(request: SearchRequest):
     keyword = request.keyword
     _, retriever = LangchainOpenAI.get_langchain_retriever()
-    result = await retriever._aget_relevant_documents(keyword)
+    result = await retriever._aget_relevant_documents(query=keyword, run_manager = AsyncCallbackManagerForRetrieverRun.get_noop_manager())
     return result
