@@ -23,7 +23,7 @@ cd vietnamese-laws-ai-system-ai
 #### 2. Start app
 #### 2.1 Using `make` command
 ```bash
-make all
+make install
 ```
 #### 2.2 Run locally
 ```
