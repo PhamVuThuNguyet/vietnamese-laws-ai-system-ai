@@ -11,6 +11,10 @@ COPY . .
 
 RUN pip install --upgrade pip
 
+RUN python -m pip install uvicorn
+
+RUN pip install python-dotenv
+
 RUN pip install -r requirements.txt
 
 EXPOSE 9000

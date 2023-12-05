@@ -34,7 +34,7 @@ python main.py
 
 > :warning: Please make sure that you have Docker installed.
 ```
-docker compose up
+docker compose up -d
 ```
 
 Afterwards, FastAPI automatically generates documentation based on the specification of the endpoints you have written. You can find the docs at http://localhost:9000/docs.
