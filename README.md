@@ -4,6 +4,9 @@
 
 Getting started developing with this template is pretty simple using docker and docker-compose.
 
+## Training data
+- [Google Drive](https://drive.google.com/file/d/1GXDA94yYdC-dSASfCED9Q06-BVbHYSAe/view?usp=sharing)
+
 ## Clone the repository
 
 ```
